@@ -1,4 +1,4 @@
-import { slot4BrandConfig } from './brand.config'
+﻿import { slot4BrandConfig } from './brand.config'
 
 export type Slot4VisualPreset =
   | 'editorial-paper'
@@ -155,3 +155,7 @@ export const visualSystem = {
 export function getVisualPreset(name: Slot4VisualPreset = visualSystem.recommendedPreset as Slot4VisualPreset) {
   return visualPresets[name]
 }
+// redesign-refresh-marker
+
+
+

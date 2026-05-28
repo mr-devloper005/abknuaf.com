@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+﻿import { cn } from '@/lib/utils'
 
 type LoadingStateProps = {
   label?: string
@@ -57,3 +57,7 @@ export function DetailLoadingState({ label = 'Loading detail', className }: Load
     </div>
   )
 }
+// redesign-refresh-marker
+
+
+

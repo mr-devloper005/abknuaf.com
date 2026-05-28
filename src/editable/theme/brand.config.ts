@@ -1,4 +1,4 @@
-import { siteIdentity } from '@/config/site.identity'
+﻿import { siteIdentity } from '@/config/site.identity'
 import { getFactoryState } from '@/design/factory/get-factory-state'
 import { getProductKind } from '@/design/factory/get-product-kind'
 
@@ -21,3 +21,7 @@ export const slot4BrandConfig = {
           ? { primary: '#0f172a', surface: '#f8fbff' }
           : { primary: '#5b2b3b', surface: '#f7f1ea' },
 } as const
+// redesign-refresh-marker
+
+
+
