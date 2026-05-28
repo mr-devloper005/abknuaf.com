@@ -1,73 +1,83 @@
-'use client'
+﻿'use client'
 
-import { useMemo, useState, type CSSProperties } from 'react'
+import { useEffect, useMemo, useState, type CSSProperties } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, Search, UserPlus, LogIn, X } from 'lucide-react'
+import { Menu, Search, UserPlus, LogIn, X, Sparkles } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/site-config'
 import { globalContent } from '@/editable/content/global.content'
-import { getVisualPreset, visualSystem } from '@/editable/theme/visual-system'
+import brandLogo from '@/editable/theme/brand-logo.png'
 
 export function EditableNavbar() {
-  const preset = getVisualPreset(visualSystem.recommendedPreset as any)
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
-  const navVars = { '--editable-nav-bg': preset.colors.background, '--editable-nav-text': preset.colors.foreground, '--editable-nav-active': preset.colors.foreground, '--editable-nav-active-text': preset.colors.background, '--editable-cta-bg': preset.colors.foreground, '--editable-cta-text': preset.colors.background, '--editable-search-bg': preset.colors.surface, '--editable-border': `${preset.colors.muted}33`, '--editable-container': '1440px' } as CSSProperties
-  const navItems = useMemo(
-    () => SITE_CONFIG.tasks.filter((task) => task.enabled).map((task) => ({ label: task.label, href: task.route })),
-    []
-  )
+  const navItems = useMemo(() => SITE_CONFIG.tasks.filter((task) => task.enabled).map((task) => ({ label: task.label, href: task.route })), [])
+  useEffect(() => {
+    const favicon = document.querySelector<HTMLLinkElement>('link[rel*="icon"]')
+    if (favicon) favicon.href = brandLogo.src
+  }, [])
+  const navVars = {
+    '--editable-nav-bg': 'rgba(17,24,68,0.96)',
+    '--editable-nav-text': '#111844',
+    '--editable-nav-active': '#4B5694',
+    '--editable-nav-active-text': '#EAE0CF',
+    '--editable-cta-bg': '#4B5694',
+    '--editable-cta-text': '#EAE0CF',
+    '--editable-search-bg': '#EAE0CF',
+    '--editable-border': 'rgba(114,136,174,0.45)',
+    '--editable-container': '1440px',
+  } as CSSProperties
 
   return (
-    <header style={navVars} className="sticky top-0 z-50 border-b border-[var(--editable-border)] bg-[var(--editable-nav-bg)]/92 text-[var(--editable-nav-text)] backdrop-blur-2xl">
-      <nav className="mx-auto flex min-h-[88px] w-full max-w-[var(--editable-container)] items-center gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="group flex shrink-0 items-center gap-3">
-          <span className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-[1.4rem] border border-[var(--editable-border)] bg-white shadow-sm transition-transform group-hover:-rotate-2">
-            <img src="/favicon.png?v=20260413" alt={SITE_CONFIG.name} className="h-11 w-11 object-contain" />
+    <header style={navVars} className="sticky top-0 z-50 border-b border-[var(--editable-border)] bg-[var(--editable-nav-bg)] text-[#EAE0CF] backdrop-blur-xl">
+      <nav className="mx-auto flex min-h-[84px] w-full max-w-[var(--editable-container)] items-center gap-4 px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="group flex items-center gap-3">
+          <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-2xl border border-[var(--editable-border)] bg-[#4B5694] text-[#EAE0CF] shadow-sm transition group-hover:rotate-6">
+            <img src={brandLogo.src} alt={`${SITE_CONFIG.name} logo`} className="h-full w-full object-cover" />
           </span>
-          <span className="hidden min-w-0 sm:block">
-            <span className="block max-w-[180px] truncate text-sm font-black tracking-[-0.03em]">{SITE_CONFIG.name}</span>
-            <span className="block max-w-[180px] truncate text-[11px] font-bold uppercase tracking-[0.18em] opacity-55">{globalContent.nav?.tagline || SITE_CONFIG.tagline}</span>
+          <span>
+            <span className="block text-lg font-black tracking-[-0.04em]">{SITE_CONFIG.name}</span>
           </span>
         </Link>
 
-        <form action="/search" className="mx-auto hidden min-w-0 flex-1 justify-center md:flex">
-          <label className="relative flex w-full max-w-xl items-center rounded-full border border-[var(--editable-border)] bg-[var(--editable-search-bg)] px-4 py-3 shadow-sm">
-            <Search className="h-4 w-4 opacity-55" />
-            <input name="q" type="search" placeholder={'Search posts'} className="min-w-0 flex-1 bg-transparent px-3 text-sm font-semibold outline-none placeholder:text-current/45" />
+        <form action="/search" className="mx-auto hidden min-w-0 max-w-2xl flex-1 md:block">
+          <label className="flex h-12 items-center rounded-full border border-[var(--editable-border)] bg-[var(--editable-search-bg)] px-4 text-[#111844]">
+            <Search className="h-4 w-4 opacity-60" />
+            <input name="q" type="search" placeholder="Search products, services, locations, sellers" className="min-w-0 flex-1 bg-transparent px-3 text-sm font-semibold outline-none placeholder:text-current/45" />
           </label>
         </form>
 
-        <div className="hidden items-center gap-2 lg:flex">
-          {navItems.slice(0, 4).map((item) => {
+        <div className="hidden items-center gap-2 xl:flex">
+          {navItems.slice(0, 5).map((item) => {
             const active = pathname === item.href || pathname.startsWith(`${item.href}/`)
             return (
-              <Link key={item.href} href={item.href} className={`rounded-full px-4 py-2 text-sm font-black transition ${active ? 'bg-[var(--editable-nav-active)] text-[var(--editable-nav-active-text)]' : 'hover:bg-black/5'}`}>
+              <Link key={item.href} href={item.href} className={`rounded-full px-4 py-2 text-sm font-black transition ${active ? 'bg-[var(--editable-nav-active)] text-[var(--editable-nav-active-text)]' : 'hover:bg-white/10'}`}>
                 {item.label}
               </Link>
             )
           })}
         </div>
 
-        <div className="ml-auto flex shrink-0 items-center gap-2">
-          <Link href="/login" className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-black hover:bg-black/5 sm:inline-flex"><LogIn className="h-4 w-4" /> Login</Link>
-          <Link href="/signup" className="hidden items-center gap-2 rounded-full bg-[var(--editable-cta-bg)] px-4 py-2.5 text-sm font-black text-[var(--editable-cta-text)] shadow-sm sm:inline-flex"><UserPlus className="h-4 w-4" /> Sign up</Link>
-          <button type="button" onClick={() => setOpen((value) => !value)} className="rounded-full border border-[var(--editable-border)] bg-white p-2 lg:hidden" aria-label="Toggle menu">
+        <div className="ml-auto flex items-center gap-2">
+          <Link href="/login" className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-black hover:bg-white/10 sm:inline-flex"><LogIn className="h-4 w-4" /> Login</Link>
+          <Link href="/signup" className="hidden items-center gap-2 rounded-full bg-[var(--editable-cta-bg)] px-4 py-2 text-sm font-black text-[var(--editable-cta-text)] sm:inline-flex"><UserPlus className="h-4 w-4" /> Post free</Link>
+          <button type="button" onClick={() => setOpen((v) => !v)} className="rounded-full border border-[var(--editable-border)] bg-[#EAE0CF] p-2 text-[#111844] xl:hidden" aria-label="Toggle menu">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </nav>
 
       {open ? (
-        <div className="border-t border-[var(--editable-border)] bg-[var(--editable-nav-bg)] px-4 py-4 lg:hidden">
-          <form action="/search" className="mb-4 flex rounded-2xl border border-[var(--editable-border)] bg-[var(--editable-search-bg)] px-3 py-2">
-            <Search className="mt-1 h-4 w-4 opacity-55" />
-            <input name="q" type="search" placeholder="Search posts" className="min-w-0 flex-1 bg-transparent px-3 text-sm outline-none" />
+        <div className="border-t border-[var(--editable-border)] bg-[var(--editable-nav-bg)] px-4 py-4 xl:hidden">
+          <form action="/search" className="mb-4 flex h-11 items-center rounded-2xl border border-[var(--editable-border)] bg-[var(--editable-search-bg)] px-3">
+            <Search className="h-4 w-4 opacity-60" />
+            <input name="q" type="search" placeholder="Search listings" className="min-w-0 flex-1 bg-transparent px-3 text-sm text-[#111844] outline-none" />
           </form>
           <div className="grid gap-2">
-            {[{ label: 'Home', href: '/' }, ...navItems, { label: 'Contact', href: '/contact' }].map((item) => (
-              <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="rounded-2xl border border-[var(--editable-border)] bg-white px-4 py-3 text-sm font-black">
-                {item.label}
+            {[{ label: 'Home', href: '/' }, ...navItems, { label: 'Contact', href: '/contact' }, { label: 'About', href: '/about' }].map((item) => (
+              <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="flex items-center justify-between rounded-2xl border border-[var(--editable-border)] bg-[#EAE0CF] px-4 py-3 text-sm font-black text-[#111844]">
+                <span>{item.label}</span>
+                <Sparkles className="h-4 w-4 opacity-60" />
               </Link>
             ))}
           </div>
@@ -76,3 +86,7 @@ export function EditableNavbar() {
     </header>
   )
 }
+// redesign-refresh-marker
+
+
+

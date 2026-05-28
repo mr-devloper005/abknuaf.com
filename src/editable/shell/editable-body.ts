@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+﻿import type { CSSProperties } from 'react'
 
 import { getFactoryState } from '@/design/factory/get-factory-state'
 import { editableRootStyle } from '@/editable/layouts/design-contract'
@@ -20,3 +20,7 @@ export function getEditableBodyProps(): EditableBodyProps {
     style: editableRootStyle,
   }
 }
+// redesign-refresh-marker
+
+
+

@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+﻿import type { ReactNode } from 'react'
 import { EditableNavbar } from '@/editable/shell/EditableNavbar'
 import { EditableFooter } from '@/editable/shell/EditableFooter'
 import { editableDesignContract as dc } from '@/editable/layouts/design-contract'
@@ -12,3 +12,7 @@ export function EditableSiteShell({ children, className = '' }: { children: Reac
     </div>
   )
 }
+// redesign-refresh-marker
+
+
+
