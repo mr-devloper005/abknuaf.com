@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { SchemaJsonLd } from '@/components/seo/schema-jsonld'
 import { SITE_CONFIG, type TaskKey } from '@/lib/site-config'
 import { buildPageMetadata } from '@/lib/seo'
@@ -61,3 +61,7 @@ export default async function HomePage() {
     </EditableSiteShell>
   )
 }
+// redesign-refresh-marker
+
+
+

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import { ArrowRight, ChevronLeft } from 'lucide-react'
 import type { SitePost, SiteFeedPagination } from '@/lib/site-connector'
 import { CATEGORY_OPTIONS } from '@/lib/categories'
@@ -75,3 +75,7 @@ export function EditableArticleDetailShell({ slug, post }: { slug: string; post:
     </main>
   )
 }
+// redesign-refresh-marker
+
+
+

@@ -1,4 +1,4 @@
-# Slot 4 Editable Manifest
+﻿# Slot 4 Editable Manifest
 
 Slot 4 is now a reference-ready editable UI architecture.
 
@@ -51,3 +51,8 @@ For one-time base infrastructure changes only:
 ```bash
 ALLOW_INFRASTRUCTURE_CHANGES=1 pnpm guard:editable
 ```
+
+<!-- redesign-refresh-marker -->
+
+
+

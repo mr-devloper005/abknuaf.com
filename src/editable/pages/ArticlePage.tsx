@@ -1,4 +1,4 @@
-import { EditableTaskArchiveRoute, taskMetadata } from '@/editable/pages/TaskArchivePage'
+﻿import { EditableTaskArchiveRoute, taskMetadata } from '@/editable/pages/TaskArchivePage'
 
 export const revalidate = 3
 
@@ -17,3 +17,7 @@ export async function ArticlePageTaskPage({
 export default ArticlePageTaskPage
 
 export const ArticleTaskPage = ArticlePageTaskPage
+// redesign-refresh-marker
+
+
+
