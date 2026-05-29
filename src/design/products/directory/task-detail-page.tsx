@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Globe, Mail, MapPin, Phone, ShieldCheck, Tag } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ExternalLink, Globe, Mail, MapPin, Phone, ShieldCheck, Sparkles, Tag } from 'lucide-react'
 import { ContentImage } from '@/components/shared/content-image'
 import { SchemaJsonLd } from '@/components/seo/schema-jsonld'
 import { TaskPostCard } from '@/components/shared/task-post-card'
@@ -43,6 +43,104 @@ export function DirectoryTaskDetailPage({
     address: location || undefined,
     telephone: phone || undefined,
     email: email || undefined,
+  }
+
+  if (task === 'classified') {
+    return (
+      <div className="min-h-screen bg-[#f7f8fb] text-slate-950">
+        <SchemaJsonLd data={schemaPayload} />
+        <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+          <Link href={taskRoute} className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-black transition hover:-translate-y-0.5">
+            <ArrowLeft className="h-4 w-4" /> Back to {taskLabel}
+          </Link>
+
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
+            <div className="space-y-6">
+              <article className="overflow-hidden rounded-[2.4rem] border border-slate-200 bg-white shadow-[0_18px_45px_rgba(16,23,40,0.08)]">
+                <div className="relative">
+                  <ContentImage src={images[0]} alt={post.title} fill className="object-cover" />
+                  <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(8,16,38,0.92))] px-5 py-4 text-white sm:px-8">
+                    <p className="text-[11px] font-black uppercase tracking-[0.24em] text-white/80">{category}</p>
+                    <h1 className="mt-2 max-w-4xl text-4xl font-black leading-[0.95] tracking-[-0.06em] sm:text-5xl lg:text-6xl">{post.title}</h1>
+                  </div>
+                </div>
+              </article>
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                {location ? <div className="inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-600"><MapPin className="h-4 w-4" /> {location}</div> : null}
+                {phone ? <a href={`tel:${phone}`} className="inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-600 transition hover:-translate-y-0.5"><Phone className="h-4 w-4" /> {phone}</a> : null}
+                {website ? <a href={website} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-600 transition hover:-translate-y-0.5"><ExternalLink className="h-4 w-4" /> Website</a> : null}
+              </div>
+
+              <div className="rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-6">
+                <p className="text-sm leading-8 text-slate-700">{description}</p>
+              </div>
+
+              {highlights.length ? (
+                <div className="rounded-[2rem] border border-slate-200 bg-[linear-gradient(180deg,#f9fbff_0%,#eef3ff_100%)] p-5 sm:p-6">
+                  <div className="flex items-center gap-2 text-xl font-black tracking-[-0.04em]">
+                    <Sparkles className="h-5 w-5 text-[var(--slot4-accent)]" />
+                    Quick summary
+                  </div>
+                  <ul className="mt-4 space-y-3">
+                    {highlights.slice(0, 4).map((item) => (
+                      <li key={item} className="flex gap-3 text-sm leading-7 text-slate-700">
+                        <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--slot4-accent)]" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {related.length ? (
+                <section className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-[0_12px_35px_rgba(16,23,40,0.08)]">
+                  <div className="flex items-end justify-between gap-4 border-b border-slate-200 pb-5">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">Related posts</p>
+                      <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em]">Keep browsing nearby matches.</h2>
+                    </div>
+                  </div>
+                  <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                    {related.map((item) => (
+                      <TaskPostCard key={item.id || item.slug} post={item} href={`${taskRoute}/${item.slug}`} taskKey={task} />
+                    ))}
+                  </div>
+                </section>
+              ) : null}
+            </div>
+
+            <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
+              <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-[0_12px_35px_rgba(16,23,40,0.08)]">
+                <h3 className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">Contact and details</h3>
+                <div className="mt-4 grid gap-3 text-sm font-medium text-slate-600">
+                  {location ? <p className="inline-flex items-center gap-2"><MapPin className="h-4 w-4" /> {location}</p> : null}
+                  {phone ? <a href={`tel:${phone}`} className="inline-flex items-center gap-2 transition hover:text-slate-950"><Phone className="h-4 w-4" /> {phone}</a> : null}
+                  {email ? <a href={`mailto:${email}`} className="inline-flex items-center gap-2 transition hover:text-slate-950"><Mail className="h-4 w-4" /> {email}</a> : null}
+                  {website ? <a href={website} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition hover:text-slate-950"><ExternalLink className="h-4 w-4" /> Website</a> : null}
+                </div>
+              </div>
+
+              <div className="rounded-[2rem] border border-slate-200 bg-[linear-gradient(180deg,#f7f9fc_0%,#eef3ff_100%)] p-5">
+                <p className="inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
+                  <Tag className="h-4 w-4 text-[var(--slot4-accent)]" />
+                  Safe browsing tip: verify details before any payment.
+                </p>
+              </div>
+
+              {mapEmbedUrl ? (
+                <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_12px_35px_rgba(16,23,40,0.08)]">
+                  <div className="border-b border-slate-200 px-5 py-4">
+                    <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">Location</p>
+                  </div>
+                  <iframe title={`${post.title} map`} src={mapEmbedUrl} className="h-64 w-full border-0" loading="lazy" />
+                </div>
+              ) : null}
+            </aside>
+          </div>
+        </main>
+      </div>
+    )
   }
 
   return (

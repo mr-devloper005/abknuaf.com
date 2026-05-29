@@ -1,6 +1,6 @@
-﻿import Link from 'next/link'
+import Link from 'next/link'
 import type { CSSProperties } from 'react'
-import { ArrowRight, Filter, MapPin, Search } from 'lucide-react'
+import { ArrowRight, Filter, Search } from 'lucide-react'
 import { buildTaskMetadata } from '@/lib/seo'
 import { CATEGORY_OPTIONS, normalizeCategory } from '@/lib/categories'
 import { fetchPaginatedTaskPosts } from '@/lib/task-data'
@@ -9,7 +9,7 @@ import type { SiteFeedPagination, SitePost } from '@/lib/site-connector'
 import { taskPageMetadata } from '@/config/site.content'
 import { taskPageVoices } from '@/editable/content/task-pages.content'
 import { EditableSiteShell } from '@/editable/shell/EditableSiteShell'
-import { ArticleListCard, getEditableCategory, getEditableExcerpt, getEditablePostImage, postHref } from '@/editable/cards/PostCards'
+import { ArticleListCard, RailPostCard, getEditableCategory, getEditableExcerpt, getEditablePostImage, postHref } from '@/editable/cards/PostCards'
 
 export const revalidate = 3
 
@@ -41,73 +41,235 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
   const voice = taskPageVoices[task]
   const page = pagination.page || 1
   const categoryLabel = category === 'all' ? 'All categories' : CATEGORY_OPTIONS.find((item) => item.slug === category)?.name || category
+  const isClassified = String(task) === 'classified'
   const vars = {
-    '--archive-bg': task === 'classified' ? 'var(--editable-page-bg, #fffaf3)' : '#EAE0CF',
-    '--archive-text': '#111844',
-    '--archive-surface': '#fff8f1',
-    '--archive-accent': '#4B5694',
+    '--archive-bg': 'var(--slot4-page-bg, #f4f5f7)',
+    '--archive-text': 'var(--slot4-page-text, #10141f)',
+    '--archive-surface': '#ffffff',
+    '--archive-accent': 'var(--slot4-accent, #2d63f1)',
   } as CSSProperties
+
+  if (task === 'classified') {
+    return (
+      <EditableSiteShell>
+        <main style={vars} className="bg-[var(--archive-bg)] text-[var(--archive-text)]">
+          <section className="border-b border-[var(--editable-border)] bg-[#f5f7fb]">
+            <div className="mx-auto max-w-[var(--editable-container)] px-4 py-5 sm:px-6 lg:px-8 lg:py-6">
+              <div className="overflow-hidden rounded-[1.8rem] border border-[var(--editable-border)] bg-white shadow-[0_14px_35px_rgba(16,23,40,0.05)]">
+                <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
+                  <div className="p-5 sm:p-6 lg:p-7">
+                    <p className="text-[11px] font-black uppercase tracking-[0.32em] text-[var(--archive-accent)]">
+                      {voice.eyebrow}
+                    </p>
+                    <h1 className="mt-2 max-w-2xl text-2xl font-black leading-[0.95] tracking-[-0.06em] sm:text-3xl lg:text-5xl">
+                      {voice.headline}
+                    </h1>
+                    <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--slot4-muted-text)]">
+                      {voice.description || SITE_CONFIG.description}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {voice.chips.map((chip) => (
+                        <span
+                          key={chip}
+                          className="rounded-full border border-[var(--editable-border)] bg-[#f7f9fc] px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.16em]"
+                        >
+                          {chip}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="border-t border-[var(--editable-border)] bg-[#fafbff] p-4 sm:p-5 lg:border-l lg:border-t-0">
+                    <form action={basePath} className="grid h-full gap-3">
+                      <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.24em] text-[var(--slot4-muted-text)]">
+                        <Filter className="h-4 w-4" /> Filter posts
+                      </div>
+                      <label className="grid gap-2 text-sm font-black">
+                        Search
+                        <div className="flex h-10 items-center rounded-2xl border border-[var(--editable-border)] bg-white px-3">
+                          <Search className="h-4 w-4 text-black/45" />
+                          <input
+                            name="q"
+                            placeholder="Search within this section"
+                            className="min-w-0 flex-1 bg-transparent px-3 text-sm outline-none"
+                          />
+                        </div>
+                      </label>
+                      <label className="grid gap-2 text-sm font-black">
+                        Category
+                        <select
+                          name="category"
+                          defaultValue={category}
+                          className="h-11 rounded-2xl border border-[var(--editable-border)] bg-white px-4 text-sm font-medium outline-none"
+                        >
+                          <option value="all">All categories</option>
+                          {CATEGORY_OPTIONS.map((item) => (
+                            <option key={item.slug} value={item.slug}>
+                              {item.name}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <button className="mt-auto inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[var(--archive-accent)] px-5 text-sm font-black text-white transition hover:-translate-y-0.5">
+                        Apply filters <ArrowRight className="h-4 w-4" />
+                      </button>
+                      <p className="text-[11px] font-medium text-[var(--slot4-muted-text)]">Showing {categoryLabel}</p>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="mx-auto max-w-[var(--editable-container)] px-4 py-5 sm:px-6 lg:px-8 lg:py-8">
+            {posts.length ? (
+              <div className="grid items-start gap-4 md:grid-cols-2 xl:grid-cols-4">
+                {posts.map((post, index) => (
+                  <TaskCard
+                    key={post.id || post.slug}
+                    post={post}
+                    href={postHref(task, post, basePath)}
+                    index={index}
+                    variant="classified"
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-[2rem] border border-dashed border-[var(--editable-border)] bg-white p-10 text-center shadow-[0_12px_35px_rgba(16,23,40,0.06)]">
+                <Search className="mx-auto h-8 w-8 text-[var(--slot4-muted-text)]" />
+                <h2 className="mt-4 text-3xl font-black tracking-[-0.05em]">No posts available</h2>
+                <p className="mt-2 text-sm leading-7 text-[var(--slot4-muted-text)]">Try another category or check back soon.</p>
+              </div>
+            )}
+
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+              {pagination.hasPrevPage ? (
+                <Link
+                  href={pageHref(basePath, category, page - 1)}
+                  className="rounded-full border border-[var(--editable-border)] bg-white px-5 py-2.5 text-sm font-black transition hover:-translate-y-0.5"
+                >
+                  Previous
+                </Link>
+              ) : null}
+              <span className="rounded-full bg-[var(--slot4-dark-bg)] px-5 py-2.5 text-sm font-black text-white">
+                Page {page} of {pagination.totalPages || 1}
+              </span>
+              {pagination.hasNextPage ? (
+                <Link
+                  href={pageHref(basePath, category, page + 1)}
+                  className="rounded-full border border-[var(--editable-border)] bg-white px-5 py-2.5 text-sm font-black transition hover:-translate-y-0.5"
+                >
+                  Next
+                </Link>
+              ) : null}
+            </div>
+          </section>
+        </main>
+      </EditableSiteShell>
+    )
+  }
 
   return (
     <EditableSiteShell>
       <main style={vars} className="bg-[var(--archive-bg)] text-[var(--archive-text)]">
-        <section className="mx-auto grid max-w-[var(--editable-container)] gap-7 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_360px] lg:px-8 lg:py-16">
-          <div className="rounded-3xl border border-[#7288AE]/30 bg-[var(--archive-surface)] p-6 shadow-[0_18px_50px_rgba(17,24,68,0.1)] sm:p-9">
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--archive-accent)]">{voice.eyebrow}</p>
-            <h1 className="mt-4 text-4xl font-black leading-[0.95] tracking-[-0.05em] sm:text-5xl">{voice.headline}</h1>
-            <p className="mt-5 max-w-3xl text-base leading-8 text-[#5f6b93]">{voice.description || SITE_CONFIG.description}</p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {voice.chips.map((chip) => <span key={chip} className="rounded-full border border-[#7288AE]/35 bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]">{chip}</span>)}
+        <section className="border-b border-[var(--editable-border)] bg-[#f7f9fc]">
+          <div className="mx-auto grid max-w-[var(--editable-container)] gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-10">
+            <div className="rounded-[2rem] border border-[var(--editable-border)] bg-white p-6 shadow-[0_18px_45px_rgba(16,23,40,0.08)] sm:p-8">
+              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[var(--archive-accent)]">{voice.eyebrow}</p>
+              <h1 className="mt-4 max-w-3xl text-4xl font-black leading-[0.96] tracking-[-0.06em] sm:text-5xl">{voice.headline}</h1>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--slot4-muted-text)]">{voice.description || SITE_CONFIG.description}</p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {voice.chips.map((chip) => (
+                  <span key={chip} className="rounded-full border border-[var(--editable-border)] bg-[#f7f9fc] px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]">
+                    {chip}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <form action={basePath} className="self-start rounded-3xl border border-[#7288AE]/30 bg-white p-5 shadow-sm">
-            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-[#5f6b93]"><Filter className="h-4 w-4" /> Filter posts</div>
-            <select name="category" defaultValue={category} className="mt-4 h-11 w-full rounded-2xl border border-[#7288AE]/35 bg-[#fff9f3] px-4 text-sm font-bold outline-none">
-              <option value="all">All categories</option>
-              {CATEGORY_OPTIONS.map((item) => <option key={item.slug} value={item.slug}>{item.name}</option>)}
-            </select>
-            <button className="mt-3 h-11 w-full rounded-2xl bg-[#4B5694] text-sm font-black text-white">Apply</button>
-            <p className="mt-3 text-xs font-bold text-[#5f6b93]">Showing {categoryLabel}</p>
-          </form>
+            <form action={basePath} className="self-start rounded-[2rem] border border-[var(--editable-border)] bg-white p-5 shadow-[0_12px_35px_rgba(16,23,40,0.08)]">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-[var(--slot4-muted-text)]">
+                <Filter className="h-4 w-4" /> Filter posts
+              </div>
+              <div className="mt-4 grid gap-3">
+                <label className="grid gap-2 text-sm font-black">
+                  Search
+                  <div className="flex h-11 items-center rounded-2xl border border-[var(--editable-border)] bg-[#f7f9fc] px-3">
+                    <Search className="h-4 w-4 text-black/45" />
+                    <input name="q" placeholder="Search within this section" className="min-w-0 flex-1 bg-transparent px-3 text-sm outline-none" />
+                  </div>
+                </label>
+                <label className="grid gap-2 text-sm font-black">
+                  Category
+                  <select name="category" defaultValue={category} className="h-11 rounded-2xl border border-[var(--editable-border)] bg-[#f7f9fc] px-4 text-sm font-medium outline-none">
+                    <option value="all">All categories</option>
+                    {CATEGORY_OPTIONS.map((item) => (
+                      <option key={item.slug} value={item.slug}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              <button className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[var(--archive-accent)] px-5 text-sm font-black text-white transition hover:-translate-y-0.5">
+                Apply filters <ArrowRight className="h-4 w-4" />
+              </button>
+              <p className="mt-3 text-xs font-medium text-[var(--slot4-muted-text)]">Showing {categoryLabel}</p>
+            </form>
+          </div>
         </section>
 
-        <section className="mx-auto max-w-[var(--editable-container)] px-4 pb-16 sm:px-6 lg:px-8">
+        <section className="mx-auto max-w-[var(--editable-container)] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
           {posts.length ? (
-            <div className={task === 'classified' ? 'grid items-start gap-5 md:grid-cols-2' : 'grid items-start gap-5 xl:grid-cols-2'}>
+            <div className={isClassified ? 'grid items-start gap-5 md:grid-cols-2 xl:grid-cols-4' : 'grid items-start gap-5 md:grid-cols-2 xl:grid-cols-3'}>
               {posts.map((post, index) => {
                 const variant =
-                  task === 'classified'
+                  isClassified
                     ? index === 0
                       ? 'featured'
-                      : index % 3 === 0
+                      : index % 4 === 0
                         ? 'compact'
-                        : 'horizontal'
-                    : 'default'
+                        : index % 3 === 0
+                          ? 'horizontal'
+                          : 'list'
+                    : task === 'image'
+                      ? 'image'
+                      : index % 2 === 0
+                        ? 'horizontal'
+                        : 'list'
                 return (
                   <TaskCard
                     key={post.id || post.slug}
                     post={post}
                     href={postHref(task, post, basePath)}
                     index={index}
-                    task={task}
                     variant={variant}
                   />
                 )
               })}
             </div>
           ) : (
-            <div className="rounded-3xl border border-dashed border-[#7288AE]/40 bg-white/70 p-10 text-center">
-              <Search className="mx-auto h-7 w-7 text-[#5f6b93]" />
+            <div className="rounded-[2rem] border border-dashed border-[var(--editable-border)] bg-white p-10 text-center shadow-[0_12px_35px_rgba(16,23,40,0.06)]">
+              <Search className="mx-auto h-8 w-8 text-[var(--slot4-muted-text)]" />
               <h2 className="mt-4 text-3xl font-black tracking-[-0.05em]">No posts available</h2>
-              <p className="mt-2 text-sm text-[#5f6b93]">Try another category or check back soon.</p>
+              <p className="mt-2 text-sm leading-7 text-[var(--slot4-muted-text)]">Try another category or check back soon.</p>
             </div>
           )}
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            {pagination.hasPrevPage ? <Link href={pageHref(basePath, category, page - 1)} className="rounded-full border border-[#7288AE]/35 bg-white px-5 py-2.5 text-sm font-black">Previous</Link> : null}
-            <span className="rounded-full bg-[#111844] px-5 py-2.5 text-sm font-black text-[#EAE0CF]">Page {page} of {pagination.totalPages || 1}</span>
-            {pagination.hasNextPage ? <Link href={pageHref(basePath, category, page + 1)} className="rounded-full border border-[#7288AE]/35 bg-white px-5 py-2.5 text-sm font-black">Next</Link> : null}
+            {pagination.hasPrevPage ? (
+              <Link href={pageHref(basePath, category, page - 1)} className="rounded-full border border-[var(--editable-border)] bg-white px-5 py-2.5 text-sm font-black transition hover:-translate-y-0.5">
+                Previous
+              </Link>
+            ) : null}
+            <span className="rounded-full bg-[var(--slot4-dark-bg)] px-5 py-2.5 text-sm font-black text-white">
+              Page {page} of {pagination.totalPages || 1}
+            </span>
+            {pagination.hasNextPage ? (
+              <Link href={pageHref(basePath, category, page + 1)} className="rounded-full border border-[var(--editable-border)] bg-white px-5 py-2.5 text-sm font-black transition hover:-translate-y-0.5">
+                Next
+              </Link>
+            ) : null}
           </div>
         </section>
       </main>
@@ -119,69 +281,76 @@ function TaskCard({
   post,
   href,
   index,
-  task,
-  variant = 'default',
+  variant = 'list',
 }: {
   post: SitePost
   href: string
   index: number
-  task: TaskKey
-  variant?: 'default' | 'featured' | 'compact' | 'horizontal'
+  variant?: 'featured' | 'compact' | 'horizontal' | 'list' | 'image' | 'classified'
 }) {
-  if (task === 'image') {
+  if (variant === 'classified') {
     return (
-      <Link href={href} className="group block overflow-hidden rounded-3xl border border-[#7288AE]/30 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-        <img src={getEditablePostImage(post)} alt={post.title} className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105" />
-        <div className="p-4">
-          <h3 className="line-clamp-2 text-xl font-black">{post.title}</h3>
+      <Link href={href} className="group block overflow-hidden rounded-[1.6rem] border border-[var(--editable-border)] bg-white shadow-[0_12px_30px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1">
+        <div className="relative aspect-[4/3] overflow-hidden bg-[var(--slot4-media-bg)]">
+          <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+          <span className="absolute left-3 top-3 rounded-full bg-white px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--slot4-page-text)] shadow-sm">
+            #{String(index + 1).padStart(2, '0')}
+          </span>
+        </div>
+        <div className="space-y-2 p-4">
+          <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[var(--archive-accent)]">{getEditableCategory(post)}</p>
+          <h3 className="line-clamp-2 text-[1rem] font-black leading-tight tracking-[-0.03em]">{post.title || 'Untitled post'}</h3>
+          <p className="line-clamp-2 text-sm leading-6 text-[var(--slot4-muted-text)]">{getEditableExcerpt(post, 95) || 'A concise summary will appear here.'}</p>
         </div>
       </Link>
     )
   }
 
-  if (task === 'classified') {
-    const content = post.content && typeof post.content === 'object' ? (post.content as Record<string, unknown>) : {}
-    const price = typeof content.price === 'string' ? content.price : ''
-    const location = typeof content.location === 'string' ? content.location : ''
-    if (variant === 'featured') {
-      return (
-        <Link href={href} className="group md:col-span-2 overflow-hidden rounded-3xl border border-[#7288AE]/35 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-          <div className="grid gap-4 p-4 md:grid-cols-[280px_minmax(0,1fr)] md:p-5">
-            <img src={getEditablePostImage(post)} alt={post.title} className="aspect-[4/3] w-full rounded-2xl object-cover" />
-            <div className="min-w-0">
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#4B5694]">{getEditableCategory(post)} • Featured</p>
-              <h3 className="mt-2 line-clamp-2 text-3xl font-black leading-tight">{post.title}</h3>
-              <p className="mt-3 line-clamp-3 text-sm text-[#5f6b93]">{getEditableExcerpt(post, 170)}</p>
-              <div className="mt-4 flex flex-wrap gap-2 text-xs font-black uppercase tracking-[0.14em]">
-                {price ? <span className="rounded-full bg-[#d9dff0] px-3 py-1 text-[#111844]">{price}</span> : null}
-                {location ? <span className="inline-flex items-center gap-1 rounded-full border border-[#7288AE]/35 px-3 py-1 text-[#5f6b93]"><MapPin className="h-3.5 w-3.5" />{location}</span> : null}
-              </div>
+  if (variant === 'featured') {
+    return (
+      <Link href={href} className="group md:col-span-2 overflow-hidden rounded-[2rem] border border-[var(--editable-border)] bg-white shadow-[0_16px_40px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1">
+        <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
+          <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="aspect-[4/3] h-full w-full object-cover" />
+          <div className="flex flex-col justify-between p-6">
+            <div>
+              <p className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--archive-accent)]">{getEditableCategory(post)} • Featured</p>
+              <h3 className="mt-3 text-3xl font-black leading-tight tracking-[-0.05em]">{post.title || 'Untitled post'}</h3>
+              <p className="mt-3 line-clamp-4 text-sm leading-7 text-[var(--slot4-muted-text)]">{getEditableExcerpt(post, 180)}</p>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2 text-xs font-black uppercase tracking-[0.14em]">
+              <span className="rounded-full bg-[var(--slot4-accent-soft)] px-3 py-1 text-[var(--slot4-page-text)]">Open now</span>
+              <span className="rounded-full border border-[var(--editable-border)] px-3 py-1 text-[var(--slot4-muted-text)]">Listing #{index + 1}</span>
             </div>
           </div>
-        </Link>
-      )
-    }
-    if (variant === 'compact') {
-      return (
-        <Link href={href} className="group overflow-hidden rounded-3xl border border-[#7288AE]/30 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-          <img src={getEditablePostImage(post)} alt={post.title} className="aspect-[16/10] w-full rounded-2xl object-cover" />
-          <p className="mt-3 text-[11px] font-black uppercase tracking-[0.18em] text-[#4B5694]">{getEditableCategory(post)}</p>
-          <h3 className="mt-2 line-clamp-2 text-xl font-black leading-tight">{post.title}</h3>
-          <p className="mt-2 line-clamp-2 text-sm text-[#5f6b93]">{getEditableExcerpt(post, 90)}</p>
-        </Link>
-      )
-    }
+        </div>
+      </Link>
+    )
+  }
+
+  if (variant === 'compact') {
+    return <RailPostCard post={post} href={href} index={index} />
+  }
+
+  if (variant === 'horizontal') {
     return (
-      <Link href={href} className="group grid gap-4 overflow-hidden rounded-3xl border border-[#7288AE]/30 bg-white p-4 shadow-sm transition hover:-translate-y-1 sm:grid-cols-[180px_minmax(0,1fr)]">
-        <img src={getEditablePostImage(post)} alt={post.title} className="aspect-square w-full rounded-2xl object-cover" />
+      <Link href={href} className="group grid gap-4 overflow-hidden rounded-[1.75rem] border border-[var(--editable-border)] bg-white p-4 shadow-[0_12px_35px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1 sm:grid-cols-[180px_minmax(0,1fr)]">
+        <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="aspect-square w-full rounded-[1.25rem] object-cover" />
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-[#4B5694]">{getEditableCategory(post)}</p>
-          <h3 className="mt-2 line-clamp-2 text-2xl font-black leading-tight">{post.title}</h3>
-          <p className="mt-3 line-clamp-2 text-sm text-[#5f6b93]">{getEditableExcerpt(post, 115)}</p>
-          <div className="mt-4 flex flex-wrap gap-2 text-xs font-black uppercase tracking-[0.14em]">
-            {price ? <span className="rounded-full bg-[#d9dff0] px-3 py-1 text-[#111844]">{price}</span> : null}
-            {location ? <span className="inline-flex items-center gap-1 rounded-full border border-[#7288AE]/35 px-3 py-1 text-[#5f6b93]"><MapPin className="h-3.5 w-3.5" />{location}</span> : null}
-          </div>
+          <p className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--archive-accent)]">{getEditableCategory(post)}</p>
+          <h3 className="mt-2 line-clamp-2 text-xl font-black leading-tight">{post.title || 'Untitled post'}</h3>
+          <p className="mt-3 line-clamp-2 text-sm leading-6 text-[var(--slot4-muted-text)]">{getEditableExcerpt(post, 110)}</p>
+        </div>
+      </Link>
+    )
+  }
+
+  if (variant === 'image') {
+    return (
+      <Link href={href} className="group block overflow-hidden rounded-[1.75rem] border border-[var(--editable-border)] bg-white shadow-[0_12px_35px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1">
+        <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105" />
+        <div className="p-4">
+          <p className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--archive-accent)]">{getEditableCategory(post)}</p>
+          <h3 className="mt-2 line-clamp-2 text-lg font-black leading-tight">{post.title || 'Untitled post'}</h3>
         </div>
       </Link>
     )
@@ -189,7 +358,3 @@ function TaskCard({
 
   return <ArticleListCard post={post} href={href} index={index} />
 }
-// redesign-refresh-marker
-
-
-

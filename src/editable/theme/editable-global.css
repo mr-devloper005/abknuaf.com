@@ -1,12 +1,14 @@
-﻿body {
+body {
   background-color: var(--slot4-page-bg) !important;
   color: var(--slot4-page-text) !important;
   background-image: var(--slot4-body-gradient) !important;
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: rgba(129, 11, 56, 0.24);
-  color: #2d0f18;
+  background: rgba(45, 99, 241, 0.22);
+  color: #091638;
 }
 
 ::-webkit-scrollbar {
@@ -14,29 +16,43 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f0dfcc;
+  background: #e7ebf2;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4B5694;
+  background: #2d63f1;
   border-radius: 999px;
-  border: 3px solid #f0dfcc;
+  border: 3px solid #e7ebf2;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #111844;
+  background: #0d1a43;
 }
 
 .article-content h2,
 .article-content h3 {
   color: var(--slot4-accent);
+  scroll-margin-top: 6rem;
 }
 
 .article-content a {
-  color: #4B5694;
+  color: #2d63f1;
   text-decoration: underline;
 }
+
+.article-content p + p {
+  margin-top: 1rem;
+}
+
+.article-content blockquote {
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--slot4-accent);
+  padding-left: 1rem;
+  color: var(--slot4-muted-text);
+}
+
+.article-content ul,
+.article-content ol {
+  padding-left: 1.5rem;
+}
 /* redesign-refresh-marker */
-
-
-
