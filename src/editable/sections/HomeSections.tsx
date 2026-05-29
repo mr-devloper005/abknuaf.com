@@ -165,8 +165,8 @@ export function EditableStoryRail({ primaryTask, primaryRoute, posts }: HomeSect
       <div className={dc.shell.section}>
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
-            <p className={`${dc.type.eyebrow} text-[var(--slot4-accent)]`}>Fresh recommendations</p>
-            <h2 className="mt-2 text-3xl font-black tracking-[-0.05em] sm:text-4xl">Popular posts with better scanning rhythm.</h2>
+            <p className={`${dc.type.eyebrow} text-[var(--slot4-accent)]`}>Fresh classified ads</p>
+            <h2 className="mt-2 text-3xl font-black tracking-[-0.05em] sm:text-4xl">Popular local ads ready to compare.</h2>
           </div>
           <Link href={primaryRoute} className="inline-flex items-center gap-2 text-sm font-black text-[var(--slot4-accent)] transition hover:translate-x-0.5">
             View all <ArrowRight className="h-4 w-4" />
@@ -195,17 +195,17 @@ export function EditableMagazineSplit({ primaryTask, primaryRoute, posts }: Home
       <div className={dc.shell.section}>
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div className="rounded-[2rem] border border-[var(--editable-border)] bg-white p-6 shadow-[0_18px_45px_rgba(16,23,40,0.08)] sm:p-8">
-            <p className={`${dc.type.eyebrow} text-[var(--slot4-accent)]`}>Try the app</p>
-            <h2 className="mt-3 text-3xl font-black tracking-[-0.05em] sm:text-4xl">Keep browsing close at hand.</h2>
+            <p className={`${dc.type.eyebrow} text-[var(--slot4-accent)]`}>Keep browsing</p>
+            <h2 className="mt-3 text-3xl font-black tracking-[-0.05em] sm:text-4xl">Find the next useful classified faster.</h2>
             <p className="mt-4 max-w-2xl text-base leading-8 text-[var(--slot4-muted-text)]">
-              Browse, compare, and jump back into fresh posts whenever you are ready.
+              Browse categories, compare active posts, and return to fresh local ads whenever you are ready.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href={primaryRoute} className="rounded-full bg-[var(--slot4-accent)] px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5">
                 Open {taskLabel(primaryTask)}
               </Link>
               <Link href="/contact" className="rounded-full border border-[var(--editable-border)] bg-white px-5 py-3 text-sm font-black transition hover:-translate-y-0.5">
-                Post an item
+                Get posting help
               </Link>
             </div>
           </div>
@@ -233,11 +233,11 @@ export function EditableTimeCollections({ primaryTask, primaryRoute, posts, time
       <div className={dc.shell.section}>
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
-            <p className={`${dc.type.eyebrow} text-[var(--slot4-accent)]`}>Promoted content</p>
-            <h2 className="mt-2 text-3xl font-black tracking-[-0.05em] sm:text-4xl">Editorial cards with image-led rhythm.</h2>
+            <p className={`${dc.type.eyebrow} text-[var(--slot4-accent)]`}>Promoted classifieds</p>
+            <h2 className="mt-2 text-3xl font-black tracking-[-0.05em] sm:text-4xl">Featured ads with clear photos and details.</h2>
           </div>
           <button type="button" className="inline-flex items-center gap-2 rounded-full border border-[var(--editable-border)] bg-white px-5 py-3 text-sm font-black transition hover:-translate-y-0.5">
-            Load more
+            Load more ads
           </button>
         </div>
 
@@ -257,15 +257,15 @@ export function EditableHomeCta() {
       <div className="mx-auto max-w-[var(--editable-container)] px-4 sm:px-6 lg:px-8">
         <div className="grid gap-6 rounded-[2rem] border border-[var(--editable-border)] bg-white p-6 shadow-[0_16px_40px_rgba(16,23,40,0.08)] lg:grid-cols-[1.1fr_0.9fr] lg:items-center sm:p-8">
           <div>
-            <p className={`${dc.type.eyebrow} text-[var(--slot4-accent)]`}>Last step</p>
-            <h2 className="mt-3 text-3xl font-black tracking-[-0.05em] sm:text-4xl">Publish, promote, or browse with a cleaner finish.</h2>
+            <p className={`${dc.type.eyebrow} text-[var(--slot4-accent)]`}>Browse smarter</p>
+            <h2 className="mt-3 text-3xl font-black tracking-[-0.05em] sm:text-4xl">Open local classifieds with confidence.</h2>
             <p className="mt-4 max-w-2xl text-base leading-8 text-[var(--slot4-muted-text)]">
-              Keep your offers visible and easy to scan with a layout that gives every post enough room to stand out.
+              Compare services, jobs, vehicles, property, and daily offers with readable posts and direct next steps.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 lg:justify-end">
             <Link href="/classified" className="rounded-full bg-[var(--slot4-accent)] px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5">
-              Browse classified
+              Browse classifieds
             </Link>
             <Link href="/contact" className="rounded-full border border-[var(--editable-border)] bg-white px-5 py-3 text-sm font-black transition hover:-translate-y-0.5">
               Contact support

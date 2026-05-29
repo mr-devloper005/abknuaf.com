@@ -39,6 +39,7 @@ export async function EditableTaskArchiveRoute({ task, searchParams, basePath }:
 
 export function TaskArchiveView({ task, posts, pagination, category, basePath }: { task: TaskKey; posts: SitePost[]; pagination: SiteFeedPagination; category: string; basePath: string }) {
   const voice = taskPageVoices[task]
+  const pageCopy = taskPageMetadata[task]
   const page = pagination.page || 1
   const categoryLabel = category === 'all' ? 'All categories' : CATEGORY_OPTIONS.find((item) => item.slug === category)?.name || category
   const isClassified = String(task) === 'classified'
@@ -62,10 +63,10 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
                       {voice.eyebrow}
                     </p>
                     <h1 className="mt-2 max-w-2xl text-2xl font-black leading-[0.95] tracking-[-0.06em] sm:text-3xl lg:text-5xl">
-                      {voice.headline}
+                      {pageCopy?.title || voice.headline}
                     </h1>
                     <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--slot4-muted-text)]">
-                      {voice.description || SITE_CONFIG.description}
+                      {pageCopy?.description || voice.description || SITE_CONFIG.description}
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       {voice.chips.map((chip) => (
@@ -176,8 +177,8 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
           <div className="mx-auto grid max-w-[var(--editable-container)] gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-10">
             <div className="rounded-[2rem] border border-[var(--editable-border)] bg-white p-6 shadow-[0_18px_45px_rgba(16,23,40,0.08)] sm:p-8">
               <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[var(--archive-accent)]">{voice.eyebrow}</p>
-              <h1 className="mt-4 max-w-3xl text-4xl font-black leading-[0.96] tracking-[-0.06em] sm:text-5xl">{voice.headline}</h1>
-              <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--slot4-muted-text)]">{voice.description || SITE_CONFIG.description}</p>
+              <h1 className="mt-4 max-w-3xl text-4xl font-black leading-[0.96] tracking-[-0.06em] sm:text-5xl">{pageCopy?.title || voice.headline}</h1>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--slot4-muted-text)]">{pageCopy?.description || voice.description || SITE_CONFIG.description}</p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {voice.chips.map((chip) => (
                   <span key={chip} className="rounded-full border border-[var(--editable-border)] bg-[#f7f9fc] px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]">

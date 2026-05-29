@@ -2,75 +2,75 @@ import type { TaskKey } from '@/lib/site-config'
 
 export const siteContent = {
   navbar: {
-    tagline: 'Independent reading platform',
+    tagline: 'Local classified ads and services',
   },
   footer: {
-    tagline: 'Stories, resources, and discoverable posts',
+    tagline: 'Classified ads, services, and daily offers',
   },
   hero: {
-    badge: 'Latest stories and visuals',
-    title: ['A thoughtful home for', 'stories, visuals, and discovery.'],
+    badge: 'Local classifieds',
+    title: ['Find local ads, services, jobs, and deals.'],
     description:
-      'Explore fresh articles, image-led posts, and discoverable content across the platform through a calmer and clearer browsing experience.',
+      'Browse classified ads, home services, vehicles, property, jobs, shopping offers, and local updates through a clearer marketplace experience.',
     primaryCta: {
-      label: 'Read latest stories',
-      href: '/article',
+      label: 'Browse classifieds',
+      href: '/classified',
     },
     secondaryCta: {
-      label: 'Explore visuals',
-      href: '/image',
+      label: 'Contact support',
+      href: '/contact',
     },
-    searchPlaceholder: 'Search stories, visuals, listings, and more',
-    focusLabel: 'Focus',
-    featureCardBadge: 'latest cover rotation',
-    featureCardTitle: 'Latest posts shape the visual identity of the homepage.',
+    searchPlaceholder: 'Search services, cars, jobs, property, and deals',
+    focusLabel: 'Category',
+    featureCardBadge: 'featured classified',
+    featureCardTitle: 'Highlighted ads make it easier to compare what matters.',
     featureCardDescription:
-      'Recent images and stories stay at the center of the experience without changing any core platform behavior.',
+      'Recent classified posts keep photos, categories, summaries, and contact paths easy to scan.',
   },
   home: {
     metadata: {
-      title: 'Stories, visuals, and discoverable content',
+      title: 'Abknuaf classifieds for local ads, services, jobs, and deals',
       description:
-        'Explore articles, images, listings, and curated posts through a cleaner reading-first experience.',
-      openGraphTitle: 'Stories, visuals, and discoverable content',
+        'Browse local classified ads, services, vehicles, property, jobs, shopping offers, and daily deals through a clean marketplace experience.',
+      openGraphTitle: 'Abknuaf classifieds marketplace',
       openGraphDescription:
-        'Discover articles, visual posts, and connected content through a calmer reading-first experience.',
-      keywords: ['story platform', 'article site', 'visual content', 'content discovery'],
+        'Find classified ads, service providers, property, vehicles, jobs, and deals through a faster browsing experience.',
+      keywords: ['classified ads', 'local classifieds', 'services', 'jobs', 'vehicles', 'property', 'deals'],
     },
-    introBadge: 'About the platform',
-    introTitle: 'Built for reading, browsing, and connecting different kinds of content.',
+    introBadge: 'About the marketplace',
+    introTitle: 'Built for browsing and comparing local classified posts.',
     introParagraphs: [
-      'This site brings together article-style reading, visual browsing, and structured discovery so visitors can move naturally between different content types.',
-      'Instead of separating stories, visuals, and supporting resources into disconnected surfaces, the platform keeps them connected in one place with consistent navigation and easier exploration.',
-      'Whether someone starts with a story, an image-led post, a listing, or a resource page, they can keep discovering related content without friction.',
+      'This site brings together local classified ads, services, jobs, vehicles, property, and daily offers so visitors can browse practical posts in one place.',
+      'Instead of scattering posts across disconnected pages, the marketplace keeps category browsing, photos, summaries, and detail pages close together.',
+      'Whether someone starts with a home service, vehicle offer, job post, property update, or shopping deal, they can keep comparing related classifieds without friction.',
     ],
     sideBadge: 'At a glance',
     sidePoints: [
-      'Reading-first homepage with stronger emphasis on stories and imagery.',
-      'Connected sections for articles, visuals, listings, and supporting resources.',
-      'Cleaner browsing rhythm designed to make exploration feel easier.',
+      'Classified-first homepage with stronger emphasis on categories and active ads.',
+      'Connected sections for services, vehicles, property, jobs, shopping, and offers.',
+      'Cleaner browsing rhythm designed to make comparison feel easier.',
       'Lightweight interactions that keep the experience fast and readable.',
     ],
     primaryLink: {
-      label: 'Browse articles',
-      href: '/article',
+      label: 'Browse classifieds',
+      href: '/classified',
     },
     secondaryLink: {
-      label: 'See visuals',
-      href: '/image',
+      label: 'Contact support',
+      href: '/contact',
     },
   },
   cta: {
-    badge: 'Start exploring',
-    title: 'Explore articles, visuals, and resources through one connected experience.',
+    badge: 'Start browsing',
+    title: 'Browse classified ads with clearer details and faster next steps.',
     description:
-      'Move between articles, image-led posts, listings, and resources through one clearer and more connected visual system.',
+      'Move between services, vehicles, property, jobs, shopping offers, and daily local posts through one cleaner classified experience.',
     primaryCta: {
-      label: 'Browse Articles',
-      href: '/article',
+      label: 'Browse Classifieds',
+      href: '/classified',
     },
     secondaryCta: {
-      label: 'Contact Sales',
+      label: 'Contact Support',
       href: '/contact',
     },
   },
@@ -88,8 +88,8 @@ export const taskPageMetadata: Record<TaskKey, { title: string; description: str
     description: 'Explore listings, services, brands, and structured pages organized for easier browsing.',
   },
   classified: {
-    title: 'Classifieds and announcements',
-    description: 'Browse classifieds, offers, notices, and time-sensitive posts across categories.',
+    title: 'Classified ads and local offers',
+    description: 'Browse services, jobs, vehicles, property, home improvement posts, shopping offers, and local classified ads by category.',
   },
   image: {
     title: 'Image sharing and visual posts',
@@ -136,11 +136,11 @@ export const taskIntroCopy: Record<
     links: [],
   },
   classified: {
-    title: 'Classifieds, offers, and timely updates',
+    title: 'Classified ads, services, jobs, and deals',
     paragraphs: [
-      'Classified posts help surface offers, notices, deals, and time-sensitive opportunities in a faster-scanning format.',
-      'They work well alongside articles, listings, and profiles, making it easier to connect short-term posts with more structured content.',
-      'Browse by category to find announcements quickly, then continue into related sections when you need more detail.',
+      'Classified posts help surface services, jobs, vehicles, property, offers, and time-sensitive local opportunities in a faster-scanning format.',
+      'Each post keeps key details easier to compare, including category, location, summary, phone, website, images, and related matches.',
+      'Browse by category to find relevant ads quickly, then open detail pages when you need contact information or more context.',
     ],
     links: [
       { label: 'Business listings', href: '/listing' },

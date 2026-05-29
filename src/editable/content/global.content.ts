@@ -8,7 +8,7 @@ export const globalContent = {
     baseUrl: slot4BrandConfig.baseUrl,
   },
   nav: {
-    tagline: 'Browse, compare, and connect',
+    tagline: 'Browse classifieds by category',
     primaryLinks: [
       { label: 'Classifieds', href: '/classified' },
       { label: 'Listings', href: '/listing' },
@@ -16,18 +16,18 @@ export const globalContent = {
       { label: 'Contact', href: '/contact' },
     ],
     actions: {
-      primary: { label: 'Start browsing', href: '/classified' },
-      secondary: { label: 'Send inquiry', href: '/contact' },
+      primary: { label: 'Browse ads', href: '/classified' },
+      secondary: { label: 'Get support', href: '/contact' },
     },
   },
   footer: {
-    tagline: 'Abknuaf',
-    description: 'Abknuaf site updates and browsing.',
+    tagline: 'Classifieds',
+    description: 'Browse local classified ads, services, jobs, property, vehicles, and daily offers on Abknuaf.',
     columns: [
       { title: 'Explore', links: [{ label: 'Classifieds', href: '/classified' }] },
       { title: 'Site', links: [{ label: 'About', href: '/about' }, { label: 'Contact', href: '/contact' }] },
     ],
-    bottomNote: 'Abknuaf',
+    bottomNote: 'Classified browsing made simple.',
   },
   commonLabels: {
     readMore: 'Open post',
@@ -38,4 +38,3 @@ export const globalContent = {
   },
 } as const
 // redesign-refresh-marker
-

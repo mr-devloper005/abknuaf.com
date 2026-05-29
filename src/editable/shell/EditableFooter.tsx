@@ -1,10 +1,8 @@
 import Link from 'next/link'
-import { ArrowUpRight, Globe, MapPin, ShieldCheck } from 'lucide-react'
+import { ArrowUpRight, MapPin, ShieldCheck } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/site-config'
 import { globalContent } from '@/editable/content/global.content'
 import brandLogo from '@/editable/theme/brand-logo.png'
-
-const spotlightLinks = SITE_CONFIG.tasks.filter((task) => task.enabled).slice(0, 4)
 
 export function EditableFooter() {
   return (

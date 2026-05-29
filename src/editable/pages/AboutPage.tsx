@@ -10,7 +10,7 @@ export default function AboutPage() {
           <article className="rounded-[2rem] border border-[var(--editable-border)] bg-white p-6 shadow-[0_18px_45px_rgba(16,23,40,0.08)] sm:p-8 lg:p-10">
             <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[var(--slot4-accent)]">{pagesContent.about.badge}</p>
             <h1 className="mt-4 max-w-2xl text-4xl font-black leading-[0.96] tracking-[-0.06em] sm:text-5xl">
-              About {SITE_CONFIG.name}
+              {pagesContent.about.title || `About ${SITE_CONFIG.name}`}
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--slot4-muted-text)]">{pagesContent.about.description}</p>
             <div className="mt-8 space-y-4 text-sm leading-8 text-[var(--slot4-page-text)]">
