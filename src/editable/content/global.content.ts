@@ -3,12 +3,12 @@
 export const globalContent = {
   site: {
     name: slot4BrandConfig.siteName,
-    tagline: slot4BrandConfig.tagline || 'Smart classified marketplace',
+    tagline: slot4BrandConfig.tagline || 'A cleaner place to browse local offers',
     domain: slot4BrandConfig.domain,
     baseUrl: slot4BrandConfig.baseUrl,
   },
   nav: {
-    tagline: 'Buy, sell, rent, promote',
+    tagline: 'Browse classifieds by category',
     primaryLinks: [
       { label: 'Classifieds', href: '/classified' },
       { label: 'Listings', href: '/listing' },
@@ -16,29 +16,25 @@ export const globalContent = {
       { label: 'Contact', href: '/contact' },
     ],
     actions: {
-      primary: { label: 'Start browsing', href: '/classified' },
-      secondary: { label: 'Post now', href: '/contact' },
+      primary: { label: 'Browse ads', href: '/classified' },
+      secondary: { label: 'Get support', href: '/contact' },
     },
   },
   footer: {
-    tagline: 'Trusted marketplace browsing',
-    description: 'A unified destination for classified offers, services, local businesses, image posts, profiles, and documents.',
+    tagline: 'Classifieds',
+    description: 'Browse local classified ads, services, jobs, property, vehicles, and daily offers on Abknuaf.',
     columns: [
-      { title: 'Explore', links: [{ label: 'Classifieds', href: '/classified' }, { label: 'Listings', href: '/listing' }, { label: 'Images', href: '/image' }, { label: 'Profiles', href: '/profile' }] },
+      { title: 'Explore', links: [{ label: 'Classifieds', href: '/classified' }] },
       { title: 'Site', links: [{ label: 'About', href: '/about' }, { label: 'Contact', href: '/contact' }] },
     ],
-    bottomNote: 'Built for practical discovery and trusted posting.',
+    bottomNote: 'Classified browsing made simple.',
   },
   commonLabels: {
     readMore: 'Open post',
     viewAll: 'View all',
-    explore: 'Explore',
     latest: 'Latest',
     related: 'Related',
     published: 'Published',
   },
 } as const
 // redesign-refresh-marker
-
-
-
