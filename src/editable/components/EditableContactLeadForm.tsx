@@ -1,6 +1,6 @@
-﻿'use client'
+'use client'
 
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 import { CheckCircle2, Loader2 } from 'lucide-react'
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
@@ -9,7 +9,7 @@ export function EditableContactLeadForm() {
   const [status, setStatus] = useState<FormStatus>('idle')
   const [message, setMessage] = useState('')
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setStatus('submitting')
     setMessage('')
@@ -34,7 +34,7 @@ export function EditableContactLeadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-[2rem] border border-[#7288AE]/40 bg-white p-6 text-[#111844] shadow-2xl shadow-black/5 backdrop-blur md:p-8">
+    <form onSubmit={handleSubmit} className="mt-6 rounded-[1.75rem] border border-[var(--editable-border)] bg-[#f7f9fc] p-5 text-[var(--slot4-page-text)] shadow-[0_12px_32px_rgba(16,23,40,0.06)] md:p-6">
       <div className="grid gap-4 md:grid-cols-2">
         <Field name="name" label="Full name" placeholder="Your name" required />
         <Field name="email" type="email" label="Email address" placeholder="you@example.com" required />
@@ -43,9 +43,15 @@ export function EditableContactLeadForm() {
         <Field name="phone" label="Phone number" placeholder="Optional" />
         <Field name="subject" label="Subject" placeholder="How can we help?" />
       </div>
-      <label className="mt-4 grid gap-2 text-sm font-black text-[#111844]">
+      <label className="mt-4 grid gap-2 text-sm font-black">
         Message
-        <textarea name="message" required rows={6} placeholder="Tell us what you need help with..." className="rounded-2xl border border-[#7288AE]/50 bg-white px-4 py-3 text-base font-medium text-[#111844] outline-none transition placeholder:text-[#4B5694]/80 focus:border-[#4B5694]" />
+        <textarea
+          name="message"
+          required
+          rows={6}
+          placeholder="Tell us what you need help with..."
+          className="rounded-2xl border border-[var(--editable-border)] bg-white px-4 py-3 text-base font-medium text-[var(--slot4-page-text)] outline-none transition placeholder:text-black/45 focus:border-[var(--slot4-accent)]"
+        />
       </label>
       <input name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       {message ? (
@@ -54,7 +60,7 @@ export function EditableContactLeadForm() {
           <span>{message}</span>
         </div>
       ) : null}
-      <button type="submit" disabled={status === 'submitting'} className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#4B5694] px-6 text-sm font-black uppercase tracking-[0.24em] text-[#EAE0CF] shadow-lg transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70">
+      <button type="submit" disabled={status === 'submitting'} className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[var(--slot4-accent)] px-6 text-sm font-black uppercase tracking-[0.24em] text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70">
         {status === 'submitting' ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
         Send message
       </button>
@@ -64,13 +70,15 @@ export function EditableContactLeadForm() {
 
 function Field({ name, label, type = 'text', placeholder, required = false }: { name: string; label: string; type?: string; placeholder?: string; required?: boolean }) {
   return (
-    <label className="grid gap-2 text-sm font-black text-[#111844]">
+    <label className="grid gap-2 text-sm font-black">
       {label}
-      <input name={name} type={type} required={required} placeholder={placeholder} className="h-12 rounded-2xl border border-[#7288AE]/50 bg-white px-4 text-base font-medium text-[#111844] outline-none transition placeholder:text-[#4B5694]/80 focus:border-[#4B5694]" />
+      <input
+        name={name}
+        type={type}
+        required={required}
+        placeholder={placeholder}
+        className="h-12 rounded-2xl border border-[var(--editable-border)] bg-white px-4 text-base font-medium text-[var(--slot4-page-text)] outline-none transition placeholder:text-black/45 focus:border-[var(--slot4-accent)]"
+      />
     </label>
   )
 }
-// redesign-refresh-marker
-
-
-
