@@ -53,26 +53,27 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
   if (task === 'classified') {
     return (
       <EditableSiteShell>
-        <main style={vars} className="bg-[var(--archive-bg)] text-[var(--archive-text)]">
-          <section className="border-b border-[var(--editable-border)] bg-[#f5f7fb]">
-            <div className="mx-auto max-w-[var(--editable-container)] px-4 py-5 sm:px-6 lg:px-8 lg:py-6">
-              <div className="overflow-hidden rounded-[1.8rem] border border-[var(--editable-border)] bg-white shadow-[0_14px_35px_rgba(16,23,40,0.05)]">
+        <main style={vars} className="bg-[#eef1f7] text-[var(--archive-text)]">
+          <section className="border-b border-white/10 bg-[#08132f]">
+            <div className="mx-auto max-w-[var(--editable-container)] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+              <div className="overflow-hidden rounded-[2.5rem] border border-white/15 bg-[#0d1b40] shadow-[0_30px_80px_rgba(0,0,0,0.25)]">
                 <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
-                  <div className="p-5 sm:p-6 lg:p-7">
-                    <p className="text-[11px] font-black uppercase tracking-[0.32em] text-[var(--archive-accent)]">
+                  <div className="relative overflow-hidden p-7 text-white sm:p-9 lg:p-12">
+                    <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full border-[40px] border-[#4d63ff]" />
+                    <p className="relative text-[11px] font-black uppercase tracking-[0.32em] text-[#ffd84d]">
                       {voice.eyebrow}
                     </p>
-                    <h1 className="mt-2 max-w-2xl text-2xl font-black leading-[0.95] tracking-[-0.06em] sm:text-3xl lg:text-5xl">
+                    <h1 className="relative mt-4 max-w-3xl text-4xl font-black leading-[0.9] tracking-[-0.07em] sm:text-5xl lg:text-7xl">
                       {pageCopy?.title || voice.headline}
                     </h1>
-                    <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--slot4-muted-text)]">
+                    <p className="relative mt-5 max-w-xl text-base leading-8 text-white/65">
                       {pageCopy?.description || voice.description || SITE_CONFIG.description}
                     </p>
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="relative mt-6 flex flex-wrap gap-2">
                       {voice.chips.map((chip) => (
                         <span
                           key={chip}
-                          className="rounded-full border border-[var(--editable-border)] bg-[#f7f9fc] px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.16em]"
+                          className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.16em] text-white"
                         >
                           {chip}
                         </span>
@@ -80,14 +81,14 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
                     </div>
                   </div>
 
-                  <div className="border-t border-[var(--editable-border)] bg-[#fafbff] p-4 sm:p-5 lg:border-l lg:border-t-0">
+                  <div className="border-t border-white/10 bg-[#ffd84d] p-6 text-[#08132f] sm:p-8 lg:border-l lg:border-t-0">
                     <form action={basePath} className="grid h-full gap-3">
-                      <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.24em] text-[var(--slot4-muted-text)]">
+                      <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.24em] text-[#08132f]/60">
                         <Filter className="h-4 w-4" /> Filter posts
                       </div>
                       <label className="grid gap-2 text-sm font-black">
                         Search
-                        <div className="flex h-10 items-center rounded-2xl border border-[var(--editable-border)] bg-white px-3">
+                        <div className="flex h-12 items-center rounded-xl border border-[#08132f]/15 bg-white px-3 shadow-sm">
                           <Search className="h-4 w-4 text-black/45" />
                           <input
                             name="q"
@@ -101,7 +102,7 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
                         <select
                           name="category"
                           defaultValue={category}
-                          className="h-11 rounded-2xl border border-[var(--editable-border)] bg-white px-4 text-sm font-medium outline-none"
+                          className="h-12 rounded-xl border border-[#08132f]/15 bg-white px-4 text-sm font-bold outline-none shadow-sm"
                         >
                           <option value="all">All categories</option>
                           {CATEGORY_OPTIONS.map((item) => (
@@ -111,10 +112,10 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
                           ))}
                         </select>
                       </label>
-                      <button className="mt-auto inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[var(--archive-accent)] px-5 text-sm font-black text-white transition hover:-translate-y-0.5">
+                      <button className="mt-auto inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#4d63ff] px-5 text-sm font-black text-white shadow-[0_10px_24px_rgba(77,99,255,0.25)] transition hover:-translate-y-0.5">
                         Apply filters <ArrowRight className="h-4 w-4" />
                       </button>
-                      <p className="text-[11px] font-medium text-[var(--slot4-muted-text)]">Showing {categoryLabel}</p>
+                      <p className="text-[11px] font-bold text-[#08132f]/55">Showing {categoryLabel}</p>
                     </form>
                   </div>
                 </div>
@@ -122,9 +123,9 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
             </div>
           </section>
 
-          <section className="mx-auto max-w-[var(--editable-container)] px-4 py-5 sm:px-6 lg:px-8 lg:py-8">
+          <section className="mx-auto max-w-[var(--editable-container)] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
             {posts.length ? (
-              <div className="grid items-start gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <div className="grid items-stretch gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {posts.map((post, index) => (
                   <TaskCard
                     key={post.id || post.slug}
@@ -222,7 +223,7 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
 
         <section className="mx-auto max-w-[var(--editable-container)] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
           {posts.length ? (
-            <div className={isClassified ? 'grid items-start gap-5 md:grid-cols-2 xl:grid-cols-4' : 'grid items-start gap-5 md:grid-cols-2 xl:grid-cols-3'}>
+            <div className={isClassified ? 'grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-4' : 'grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-3'}>
               {posts.map((post, index) => {
                 const variant =
                   isClassified
@@ -291,15 +292,15 @@ function TaskCard({
 }) {
   if (variant === 'classified') {
     return (
-      <Link href={href} className="group block overflow-hidden rounded-[1.6rem] border border-[var(--editable-border)] bg-white shadow-[0_12px_30px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1">
+      <Link href={href} className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[#d5dbe8] bg-white shadow-[0_14px_35px_rgba(8,19,47,0.08)] transition duration-300 hover:-translate-y-1.5 hover:border-[#4d63ff]/50 hover:shadow-[0_22px_45px_rgba(8,19,47,0.14)]">
         <div className="relative aspect-[4/3] overflow-hidden bg-[var(--slot4-media-bg)]">
           <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-          <span className="absolute left-3 top-3 rounded-full bg-white px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--slot4-page-text)] shadow-sm">
+          <span className="absolute left-3 top-3 rounded-lg bg-[#ffd84d] px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[#08132f] shadow-sm">
             #{String(index + 1).padStart(2, '0')}
           </span>
         </div>
-        <div className="space-y-2 p-4">
-          <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[var(--archive-accent)]">{getEditableCategory(post)}</p>
+        <div className="flex flex-1 flex-col space-y-2 p-4">
+          <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[#4d63ff]">{getEditableCategory(post)}</p>
           <h3 className="line-clamp-2 text-[1rem] font-black leading-tight tracking-[-0.03em]">{post.title || 'Untitled post'}</h3>
           <p className="line-clamp-2 text-sm leading-6 text-[var(--slot4-muted-text)]">{getEditableExcerpt(post, 95) || 'A concise summary will appear here.'}</p>
         </div>
@@ -309,7 +310,7 @@ function TaskCard({
 
   if (variant === 'featured') {
     return (
-      <Link href={href} className="group md:col-span-2 overflow-hidden rounded-[2rem] border border-[var(--editable-border)] bg-white shadow-[0_16px_40px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1">
+      <Link href={href} className="group h-full overflow-hidden rounded-[2rem] border border-[var(--editable-border)] bg-white shadow-[0_16px_40px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1 md:col-span-2">
         <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
           <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="aspect-[4/3] h-full w-full object-cover" />
           <div className="flex flex-col justify-between p-6">
@@ -334,7 +335,7 @@ function TaskCard({
 
   if (variant === 'horizontal') {
     return (
-      <Link href={href} className="group grid gap-4 overflow-hidden rounded-[1.75rem] border border-[var(--editable-border)] bg-white p-4 shadow-[0_12px_35px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1 sm:grid-cols-[180px_minmax(0,1fr)]">
+      <Link href={href} className="group grid h-full gap-4 overflow-hidden rounded-[1.75rem] border border-[var(--editable-border)] bg-white p-4 shadow-[0_12px_35px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1 sm:grid-cols-[180px_minmax(0,1fr)]">
         <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="aspect-square w-full rounded-[1.25rem] object-cover" />
         <div>
           <p className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--archive-accent)]">{getEditableCategory(post)}</p>
@@ -347,9 +348,9 @@ function TaskCard({
 
   if (variant === 'image') {
     return (
-      <Link href={href} className="group block overflow-hidden rounded-[1.75rem] border border-[var(--editable-border)] bg-white shadow-[0_12px_35px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1">
+      <Link href={href} className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--editable-border)] bg-white shadow-[0_12px_35px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1">
         <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105" />
-        <div className="p-4">
+        <div className="flex flex-1 flex-col p-4">
           <p className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--archive-accent)]">{getEditableCategory(post)}</p>
           <h3 className="mt-2 line-clamp-2 text-lg font-black leading-tight">{post.title || 'Untitled post'}</h3>
         </div>
