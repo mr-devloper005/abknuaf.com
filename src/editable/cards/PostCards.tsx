@@ -52,8 +52,8 @@ function getAge(post?: SitePost | null) {
 
 export function EditorialFeatureCard({ post, href, label = 'Featured pick' }: { post: SitePost; href: string; label?: string }) {
   return (
-    <Link href={href} className={`group block overflow-hidden ${dc.surface.dark} ${dc.motion.lift}`}>
-      <div className="relative min-h-[520px] overflow-hidden sm:min-h-[580px]">
+    <Link href={href} className={`group block h-full overflow-hidden ${dc.surface.dark} ${dc.motion.lift}`}>
+      <div className="relative h-full min-h-[520px] overflow-hidden sm:min-h-[580px]">
         <img src={getEditablePostImage(post)} alt={post.title || 'Featured post'} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,16,38,0.08),rgba(8,16,38,0.88))]" />
         <div className="relative z-10 flex h-full flex-col justify-between p-5 sm:p-6">
@@ -88,7 +88,7 @@ export function EditorialFeatureCard({ post, href, label = 'Featured pick' }: { 
 
 export function RailPostCard({ post, href, index }: { post: SitePost; href: string; index: number }) {
   return (
-    <Link href={href} className={`group block overflow-hidden ${dc.surface.card} ${dc.motion.lift}`}>
+    <Link href={href} className={`group flex h-full flex-col overflow-hidden ${dc.surface.card} ${dc.motion.lift}`}>
       <div className="relative aspect-[4/3] overflow-hidden bg-[var(--slot4-media-bg)]">
         <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
         <span className="absolute left-3 top-3 rounded-full bg-white px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--slot4-page-text)] shadow-sm">
@@ -98,7 +98,7 @@ export function RailPostCard({ post, href, index }: { post: SitePost; href: stri
           {getEditableCategory(post)}
         </span>
       </div>
-      <div className="space-y-2 p-4">
+      <div className="flex flex-1 flex-col space-y-2 p-4">
         <p className={`text-[11px] font-black uppercase tracking-[0.22em] ${pal.accentText}`}>{getPrice(post) || 'Quick view'}</p>
         <h3 className="line-clamp-2 text-[1.02rem] font-black leading-tight tracking-[-0.03em]">{post.title || 'Untitled post'}</h3>
         <p className={`line-clamp-2 text-sm leading-6 ${pal.mutedText}`}>{getEditableExcerpt(post, 90) || 'A concise summary will appear here.'}</p>
@@ -109,7 +109,7 @@ export function RailPostCard({ post, href, index }: { post: SitePost; href: stri
 
 export function CompactIndexCard({ post, href, index }: { post: SitePost; href: string; index: number }) {
   return (
-    <Link href={href} className={`group block ${dc.surface.soft} p-4 ${dc.motion.lift}`}>
+    <Link href={href} className={`group block h-full ${dc.surface.soft} p-4 ${dc.motion.lift}`}>
       <div className="flex items-start gap-3">
         <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--slot4-dark-bg)] text-xs font-black text-white">
           {index + 1}
@@ -130,7 +130,7 @@ export function ArticleListCard({ post, href, index }: { post: SitePost; href: s
   const price = getPrice(post)
   const location = getLocation(post)
   return (
-    <Link href={href} className={`group grid gap-4 overflow-hidden ${dc.surface.card} p-4 ${dc.motion.lift} sm:grid-cols-[210px_minmax(0,1fr)]`}>
+    <Link href={href} className={`group grid h-full gap-4 overflow-hidden ${dc.surface.card} p-4 ${dc.motion.lift} sm:grid-cols-[210px_minmax(0,1fr)]`}>
       <div className={`${dc.media.frame} aspect-[4/3] sm:min-h-[190px]`}>
         <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
       </div>

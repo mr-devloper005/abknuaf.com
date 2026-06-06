@@ -52,6 +52,9 @@ export default async function HomePage() {
             },
           }}
         />
+        <div className="bg-[#ffd84d] px-4 py-2.5 text-center text-[10px] font-black uppercase tracking-[0.24em] text-[#08132f]">
+          Local ads. Real services. Better browsing.
+        </div>
         <EditableHomeHero primaryTask={primaryTask} primaryRoute={primaryRoute} posts={primaryPosts} timeSections={timeSections} />
         <EditableStoryRail primaryTask={primaryTask} primaryRoute={primaryRoute} posts={primaryPosts} timeSections={timeSections} />
         <EditableMagazineSplit primaryTask={primaryTask} primaryRoute={primaryRoute} posts={primaryPosts} timeSections={timeSections} />
