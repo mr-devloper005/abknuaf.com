@@ -34,7 +34,7 @@ export function EditableContactLeadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-6 rounded-[1.75rem] border border-[var(--editable-border)] bg-[#f7f9fc] p-5 text-[var(--slot4-page-text)] shadow-[0_12px_32px_rgba(16,23,40,0.06)] md:p-6">
+    <form onSubmit={handleSubmit} className="mt-6 rounded-[1.75rem] border border-[var(--editable-border)] bg-[#f4f5f7] p-5 text-[var(--slot4-page-text)] shadow-[0_12px_32px_rgba(16,23,40,0.06)] md:p-6">
       <div className="grid gap-4 md:grid-cols-2">
         <Field name="name" label="Full name" placeholder="Your name" required />
         <Field name="email" type="email" label="Email address" placeholder="you@example.com" required />

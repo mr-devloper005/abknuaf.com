@@ -104,7 +104,7 @@ export default function CommentsPage() {
                 Review comments saved in this browser from article pages.
               </p>
             </div>
-            <button type="button" className="rounded-full border border-[var(--editable-border)] bg-[#f7f9fc] px-4 py-2 text-sm font-black transition hover:-translate-y-0.5" onClick={refreshComments}>
+            <button type="button" className="rounded-full border border-[var(--editable-border)] bg-[#f4f5f7] px-4 py-2 text-sm font-black transition hover:-translate-y-0.5" onClick={refreshComments}>
               Refresh comments
             </button>
           </div>
@@ -119,7 +119,7 @@ export default function CommentsPage() {
                   setPage(1)
                 }}
                 placeholder="Search comments..."
-                className="h-11 w-full rounded-2xl border border-[var(--editable-border)] bg-[#f7f9fc] pl-9 pr-3 text-sm outline-none focus:border-[var(--slot4-accent)]"
+                className="h-11 w-full rounded-2xl border border-[var(--editable-border)] bg-[#f4f5f7] pl-9 pr-3 text-sm outline-none focus:border-[var(--slot4-accent)]"
               />
             </div>
             <p className="text-sm text-[var(--slot4-muted-text)]">

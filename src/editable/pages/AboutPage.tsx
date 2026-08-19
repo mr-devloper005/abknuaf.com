@@ -7,7 +7,7 @@ import { EditableSiteShell } from '@/editable/shell/EditableSiteShell'
 export default function AboutPage() {
   return (
     <EditableSiteShell>
-      <main className="bg-[#eef1f7] text-[#08132f]">
+      <main className="bg-[#f4f5f7] text-[#08132f]">
         <section className="bg-[#08132f] px-4 py-14 text-white sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[var(--editable-container)] gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <div>
@@ -40,11 +40,11 @@ export default function AboutPage() {
               {pagesContent.about.values.map((value, index) => {
                 const Icon = [Eye, Layers3, MapPinned][index] || CheckCircle2
                 return (
-                  <div key={value.title} className="flex h-full gap-5 rounded-[2rem] border border-[#d8deeb] bg-white p-6 shadow-[0_16px_38px_rgba(8,19,47,0.07)]">
+                  <div key={value.title} className="flex h-full gap-5 rounded-[2rem] border border-[#d8dde8] bg-white p-6 shadow-[0_16px_38px_rgba(8,19,47,0.07)]">
                     <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#4d63ff] text-white"><Icon className="h-5 w-5" /></span>
                     <div>
                       <h2 className="text-xl font-black tracking-[-0.04em]">{value.title}</h2>
-                      <p className="mt-2 text-sm leading-7 text-[#63708a]">{value.description}</p>
+                      <p className="mt-2 text-sm leading-7 text-[#5f6b7f]">{value.description}</p>
                     </div>
                   </div>
                 )
