@@ -23,7 +23,7 @@ export default function SignupPage() {
               <p className="mt-7 text-[11px] font-black uppercase tracking-[0.24em] text-[#4d63ff]">Free membership</p>
               <h1 className="mt-3 text-4xl font-black tracking-[-0.06em]">{pagesContent.auth.signup.formTitle}</h1>
               <EditableLocalSignupForm />
-              <p className="mt-6 border-t border-[#e3e6ee] pt-6 text-sm text-[#63708a]">
+              <p className="mt-6 border-t border-[#d8dde8] pt-6 text-sm text-[#5f6b7f]">
                 Already have an account? <Link href="/login" className="inline-flex items-center gap-1 font-black text-[#4d63ff] hover:underline">{pagesContent.auth.signup.loginCta} <ArrowRight className="h-4 w-4" /></Link>
               </p>
             </div>

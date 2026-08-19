@@ -47,16 +47,16 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
     '--archive-bg': 'var(--slot4-page-bg, #f4f5f7)',
     '--archive-text': 'var(--slot4-page-text, #10141f)',
     '--archive-surface': '#ffffff',
-    '--archive-accent': 'var(--slot4-accent, #2d63f1)',
+    '--archive-accent': 'var(--slot4-accent, #4d63ff)',
   } as CSSProperties
 
   if (task === 'classified') {
     return (
       <EditableSiteShell>
-        <main style={vars} className="bg-[#eef1f7] text-[var(--archive-text)]">
+        <main style={vars} className="bg-[#f4f5f7] text-[var(--archive-text)]">
           <section className="border-b border-white/10 bg-[#08132f]">
             <div className="mx-auto max-w-[var(--editable-container)] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-              <div className="overflow-hidden rounded-[2.5rem] border border-white/15 bg-[#0d1b40] shadow-[0_30px_80px_rgba(0,0,0,0.25)]">
+              <div className="overflow-hidden rounded-[2.5rem] border border-white/15 bg-[#08132f] shadow-[0_30px_80px_rgba(0,0,0,0.25)]">
                 <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
                   <div className="relative overflow-hidden p-7 text-white sm:p-9 lg:p-12">
                     <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full border-[40px] border-[#4d63ff]" />
@@ -174,7 +174,7 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
   return (
     <EditableSiteShell>
       <main style={vars} className="bg-[var(--archive-bg)] text-[var(--archive-text)]">
-        <section className="border-b border-[var(--editable-border)] bg-[#f7f9fc]">
+        <section className="border-b border-[var(--editable-border)] bg-[#f4f5f7]">
           <div className="mx-auto grid max-w-[var(--editable-container)] gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-10">
             <div className="rounded-[2rem] border border-[var(--editable-border)] bg-white p-6 shadow-[0_18px_45px_rgba(16,23,40,0.08)] sm:p-8">
               <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[var(--archive-accent)]">{voice.eyebrow}</p>
@@ -182,7 +182,7 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
               <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--slot4-muted-text)]">{pageCopy?.description || voice.description || SITE_CONFIG.description}</p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {voice.chips.map((chip) => (
-                  <span key={chip} className="rounded-full border border-[var(--editable-border)] bg-[#f7f9fc] px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]">
+                  <span key={chip} className="rounded-full border border-[var(--editable-border)] bg-[#f4f5f7] px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]">
                     {chip}
                   </span>
                 ))}
@@ -196,14 +196,14 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
               <div className="mt-4 grid gap-3">
                 <label className="grid gap-2 text-sm font-black">
                   Search
-                  <div className="flex h-11 items-center rounded-2xl border border-[var(--editable-border)] bg-[#f7f9fc] px-3">
+                  <div className="flex h-11 items-center rounded-2xl border border-[var(--editable-border)] bg-[#f4f5f7] px-3">
                     <Search className="h-4 w-4 text-black/45" />
                     <input name="q" placeholder="Search within this section" className="min-w-0 flex-1 bg-transparent px-3 text-sm outline-none" />
                   </div>
                 </label>
                 <label className="grid gap-2 text-sm font-black">
                   Category
-                  <select name="category" defaultValue={category} className="h-11 rounded-2xl border border-[var(--editable-border)] bg-[#f7f9fc] px-4 text-sm font-medium outline-none">
+                  <select name="category" defaultValue={category} className="h-11 rounded-2xl border border-[var(--editable-border)] bg-[#f4f5f7] px-4 text-sm font-medium outline-none">
                     <option value="all">All categories</option>
                     {CATEGORY_OPTIONS.map((item) => (
                       <option key={item.slug} value={item.slug}>
@@ -292,7 +292,7 @@ function TaskCard({
 }) {
   if (variant === 'classified') {
     return (
-      <Link href={href} className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[#d5dbe8] bg-white shadow-[0_14px_35px_rgba(8,19,47,0.08)] transition duration-300 hover:-translate-y-1.5 hover:border-[#4d63ff]/50 hover:shadow-[0_22px_45px_rgba(8,19,47,0.14)]">
+      <Link href={href} className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[#d8dde8] bg-white shadow-[0_14px_35px_rgba(8,19,47,0.08)] transition duration-300 hover:-translate-y-1.5 hover:border-[#4d63ff]/50 hover:shadow-[0_22px_45px_rgba(8,19,47,0.14)]">
         <div className="relative aspect-[4/3] overflow-hidden bg-[var(--slot4-media-bg)]">
           <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
           <span className="absolute left-3 top-3 rounded-lg bg-[#ffd84d] px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[#08132f] shadow-sm">
