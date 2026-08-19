@@ -8,7 +8,7 @@ import { globalContent } from '@/editable/content/global.content'
 import { useEditableLocalAuthSession } from '@/editable/components/EditableLocalAuthForms'
 
 export function EditableFooter() {
-  const footerVars = { '--editable-footer-bg': '#08132f', '--editable-footer-text': '#ffffff' } as CSSProperties
+  const footerVars = { '--editable-footer-bg': '#08132f', '--editable-footer-text': '#ffffff', '--editable-container': '1440px' } as CSSProperties
   const taskLinks = SITE_CONFIG.tasks.filter((task) => task.enabled)
   const year = new Date().getFullYear()
   const { session, logout } = useEditableLocalAuthSession()
@@ -18,9 +18,7 @@ export function EditableFooter() {
       <div className="mx-auto grid max-w-[var(--editable-container)] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr] lg:px-8">
         <div>
           <Link href="/" className="inline-flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/15 bg-white">
-              <img src="/favicon.png?v=20260413" alt={SITE_CONFIG.name} className="h-9 w-9 object-contain" />
-            </span>
+            <img src="/favicon.png?v=20260413" alt={SITE_CONFIG.name} className="h-20 w-20 object-contain" />
             <span className="text-xl font-black tracking-[-0.05em]">{SITE_CONFIG.name}</span>
           </Link>
           <p className="mt-4 max-w-md text-sm leading-7 opacity-70">{globalContent.footer?.description || SITE_CONFIG.description}</p>

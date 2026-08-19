@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, Search, UserPlus, LogIn, X, PlusCircle } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/site-config'
-import { globalContent } from '@/editable/content/global.content'
 import { useEditableLocalAuthSession } from '@/editable/components/EditableLocalAuthForms'
 
 export function EditableNavbar() {
@@ -22,9 +21,7 @@ export function EditableNavbar() {
     <header style={navVars} className="sticky top-0 z-50 border-b border-white/10 bg-[var(--editable-nav-bg)] text-[var(--editable-nav-text)] shadow-[0_12px_40px_rgba(8,19,47,0.22)]">
       <nav className="mx-auto flex min-h-[82px] w-full max-w-[var(--editable-container)] items-center gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="group flex shrink-0 items-center gap-3">
-          <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/20 bg-white shadow-[0_8px_24px_rgba(0,0,0,0.2)] transition-transform group-hover:-rotate-3">
-            <img src="/favicon.png?v=20260413" alt={SITE_CONFIG.name} className="h-11 w-11 object-contain" />
-          </span>
+          <img src="/favicon.png?v=20260413" alt={SITE_CONFIG.name} className="h-20 w-20 object-contain" />
           <span className="hidden min-w-0 sm:block">
             <span className="block max-w-[180px] truncate text-lg font-black tracking-[-0.05em]">{SITE_CONFIG.name}</span>
           </span>
