@@ -22,7 +22,7 @@ function taskLabel(task: TaskKey) {
 
 function CategoryTile({ name, href }: { name: string; href: string }) {
   return (
-    <Link href={href} className="group flex flex-col items-center gap-3 rounded-2xl border border-transparent bg-[#f7f9fc] px-4 py-5 text-center transition duration-300 hover:-translate-y-1 hover:border-[var(--editable-border)] hover:bg-white hover:shadow-[0_16px_32px_rgba(16,23,40,0.08)]">
+    <Link href={href} className="group flex flex-col items-center gap-3 rounded-2xl border border-transparent bg-[#f4f5f7] px-4 py-5 text-center transition duration-300 hover:-translate-y-1 hover:border-[var(--editable-border)] hover:bg-white hover:shadow-[0_16px_32px_rgba(16,23,40,0.08)]">
       <span className="grid h-20 w-20 place-items-center rounded-2xl bg-white text-[var(--slot4-accent)] shadow-[0_10px_30px_rgba(16,23,40,0.08)] transition duration-300 group-hover:scale-105">
         {renderCategoryIcon(name)}
       </span>
@@ -63,7 +63,7 @@ function HorizontalCard({ post, href }: { post: SitePost; href: string }) {
 function PromotedVisual({ post, href }: { post: SitePost; href: string }) {
   return (
     <Link href={href} className="group flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-[var(--editable-border)] bg-white shadow-[0_12px_30px_rgba(16,23,40,0.08)] transition duration-300 hover:-translate-y-1">
-      <div className="relative aspect-[4/3] overflow-hidden bg-[#f7f9fc]">
+      <div className="relative aspect-[4/3] overflow-hidden bg-[#f4f5f7]">
         <img src={getEditablePostImage(post)} alt={post.title || 'Post'} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
       </div>
       <div className="flex flex-1 flex-col p-4">
@@ -82,7 +82,7 @@ export function EditableHomeHero({ primaryTask, primaryRoute, posts }: HomeSecti
     <section className="border-b border-white/10 bg-[#08132f] text-white">
       <div className={dc.shell.section}>
         <div className="grid gap-8 py-10 lg:py-16">
-          <div className="relative overflow-hidden rounded-[2.75rem] border border-white/15 bg-[radial-gradient(circle_at_80%_10%,rgba(77,99,255,0.5),transparent_32%),linear-gradient(135deg,#0b1738_0%,#08132f_70%)] p-6 shadow-[0_35px_90px_rgba(0,0,0,0.25)] sm:p-9 lg:p-12">
+          <div className="relative overflow-hidden rounded-[2.75rem] border border-white/15 bg-[radial-gradient(circle_at_80%_10%,rgba(77,99,255,0.5),transparent_32%),linear-gradient(135deg,#08132f_0%,#08132f_70%)] p-6 shadow-[0_35px_90px_rgba(0,0,0,0.25)] sm:p-9 lg:p-12">
             <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full border-[40px] border-[#ffd84d]/80" />
             <div className="relative w-full">
               <p className={`${dc.type.eyebrow} text-[#ffd84d]`}>{pagesContent.home.hero.badge}</p>
@@ -162,7 +162,7 @@ export function EditableStoryRail({ primaryTask, primaryRoute, posts }: HomeSect
   if (!railPosts.length) return null
 
   return (
-    <section className={`border-b border-[#d9deea] bg-[#eef1f7] ${dc.shell.sectionY}`}>
+    <section className={`border-b border-[#d8dde8] bg-[#f4f5f7] ${dc.shell.sectionY}`}>
       <div className={dc.shell.section}>
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
@@ -230,7 +230,7 @@ export function EditableTimeCollections({ primaryTask, primaryRoute, posts, time
   if (!list.length) return null
 
   return (
-    <section className={`border-b border-[#d9deea] bg-white ${dc.shell.sectionY}`}>
+    <section className={`border-b border-[#d8dde8] bg-white ${dc.shell.sectionY}`}>
       <div className={dc.shell.section}>
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>

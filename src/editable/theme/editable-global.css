@@ -7,7 +7,7 @@ body {
 }
 
 ::selection {
-  background: rgba(45, 99, 241, 0.22);
+  background: rgba(77, 99, 255, 0.22);
   color: #091638;
 }
 
@@ -20,13 +20,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2d63f1;
+  background: #4d63ff;
   border-radius: 999px;
   border: 3px solid #e7ebf2;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0d1a43;
+  background: #08132f;
 }
 
 .article-content h2,
@@ -36,7 +36,7 @@ body {
 }
 
 .article-content a {
-  color: #2d63f1;
+  color: #4d63ff;
   text-decoration: underline;
 }
 
